@@ -1,7 +1,9 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+!server/src/main/**/target/
+!server/src/test/**/target/
+!client/src/main/**/target/
+!client/src/test/**/target/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
