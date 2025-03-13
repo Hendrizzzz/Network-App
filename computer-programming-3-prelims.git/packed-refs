@@ -1,0 +1,8 @@
+# pack-refs with: peeled fully-peeled sorted 
+ce49fab704ebcb375f9f47df1106f5058df34741 refs/heads/AdminCardenas
+69049374353589489e66ba8f59391fc434fc161f refs/heads/BackupMain
+5dc595cbcc7952683c6271a9a9bf40cd504689d8 refs/heads/CardenasBranch
+46482d00ac62b6fa23d6cdf9f2115eeadb8e1170 refs/heads/SibayanBranch
+47101c664de1de1ed17c1c0620ce660add893ad8 refs/heads/TestRun
+0913ba1320b749b6edf346df3086e0098cd32ae3 refs/heads/main
+a5bdfbf0905c91b7e7eed2a5ff270c50065b7896 refs/heads/revert-d15d9fdc
