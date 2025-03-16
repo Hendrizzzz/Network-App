@@ -4,6 +4,7 @@ public class Sql {
 
     // UserDAO
     static String addUser = "INSERT INTO users (first_name, last_name, user_name, hashed_password) VALUES (?, ?, ?, ?)";
+    static String deleteUser = "DELETE FROM users WHERE user_name = ?";
     static String changeLastName = "UPDATE users SET last_name = ? WHERE user_name = ?";
     static String changeFirstName = "UPDATE users SET first_name = ? WHERE user_name = ?";
     static String changePassword = "UPDATE users SET hashed_password = ? WHERE user_name = ?";

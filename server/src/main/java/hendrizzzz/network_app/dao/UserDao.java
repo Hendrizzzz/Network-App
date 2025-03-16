@@ -28,6 +28,18 @@ public class UserDao {
     }
 
 
+    public void deleteUser(String username) {
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(Sql.deleteUser)) {
+
+            statement.setString(1, username);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public int changeUsername(String username, String newUsername) throws NoChangeException {
         try (Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(Sql.changeUsername)) {
