@@ -47,7 +47,7 @@ public class User {
         this.hashedPassword = hashedPassword;
     }
 
-    public User(String hashedPassword, String username, String lastName, String firstName, byte age, char gender) {
+    public User(String firstName, String lastName, String username, String hashedPassword, byte age, char gender) {
         this.hashedPassword = hashedPassword;
         this.username = username;
         this.lastName = lastName;
@@ -56,8 +56,37 @@ public class User {
         this.gender = gender;
     }
 
+    public User(String firstName, String lastName, String username, String hashedPassword, byte age, LocalDate birthDate) {
+        this.hashedPassword = hashedPassword;
+        this.username = username;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.age = age;
+        this.birthDate = birthDate;
+    }
+
+    public User(String firstName, String lastName, String username, String hashedPassword, char gender) {
+        this.hashedPassword = hashedPassword;
+        this.username = username;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.gender = gender;
+    }
+
+
+
     public User() {
 
+    }
+
+    public User(String firstName, String lastName, String username, String hashedPassword, char gender, byte age, LocalDate birthDate) {
+        this.hashedPassword = hashedPassword;
+        this.username = username;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.age = age;
+        this.birthDate = birthDate;
+        this.gender = gender;
     }
 
     public int getId() {
