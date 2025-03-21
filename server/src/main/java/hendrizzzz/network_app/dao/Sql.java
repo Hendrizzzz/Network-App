@@ -3,7 +3,7 @@ package hendrizzzz.network_app.dao;
 public class Sql {
 
     // UserDAO
-    static String addUser = "INSERT INTO users (first_name, last_name, user_name, hashed_password) VALUES (?, ?, ?, ?)";
+    static String addUser = "INSERT INTO users (first_name, last_name, username, password, gender, age, birth_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
     static String deleteUser = "DELETE FROM users WHERE user_name = ?";
     static String changeLastName = "UPDATE users SET last_name = ? WHERE user_name = ?";
     static String changeFirstName = "UPDATE users SET first_name = ? WHERE user_name = ?";
