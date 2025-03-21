@@ -10,13 +10,13 @@ public class User {
     private String hashedPassword;
     private byte age;
     private LocalDate birthDate;
-    private char gender;
+    private Character gender;
     private int friendsCount;
     private LocalDate joinDate;
     private char whoCanSendFriendRequests;
     private char whoCanComment;
 
-    public User(int id, String firstName, String lastName, String username, String hashedPassword, byte age, LocalDate birthDate, char gender, int friendsCount, LocalDate joinDate, char whoCanSendFriendRequests, char whoCanComment) {
+    public User(int id, String firstName, String lastName, String username, String hashedPassword, byte age, LocalDate birthDate, Character gender, int friendsCount, LocalDate joinDate, char whoCanSendFriendRequests, char whoCanComment) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,7 +47,7 @@ public class User {
         this.hashedPassword = hashedPassword;
     }
 
-    public User(String firstName, String lastName, String username, String hashedPassword, byte age, char gender) {
+    public User(String firstName, String lastName, String username, String hashedPassword, byte age, Character gender) {
         this.hashedPassword = hashedPassword;
         this.username = username;
         this.lastName = lastName;
@@ -65,7 +65,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public User(String firstName, String lastName, String username, String hashedPassword, char gender) {
+    public User(String firstName, String lastName, String username, String hashedPassword, Character gender) {
         this.hashedPassword = hashedPassword;
         this.username = username;
         this.lastName = lastName;
@@ -79,7 +79,7 @@ public class User {
 
     }
 
-    public User(String firstName, String lastName, String username, String hashedPassword, char gender, byte age, LocalDate birthDate) {
+    public User(String firstName, String lastName, String username, String hashedPassword, Character gender, byte age, LocalDate birthDate) {
         this.hashedPassword = hashedPassword;
         this.username = username;
         this.lastName = lastName;
@@ -145,11 +145,11 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public char getGender() {
+    public Character getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(Character gender) {
         this.gender = gender;
     }
 
