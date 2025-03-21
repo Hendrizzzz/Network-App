@@ -1,7 +1,7 @@
 package hendrizzzz.network_app.dao;
 
 import exception.DataAccessException;
-import exception.DuplicateUserException;
+import exception.DuplicateModelException;
 import exception.NoChangeException;
 import hendrizzzz.network_app.model.User;
 
@@ -34,7 +34,7 @@ public class UserDao {
 
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new DuplicateUserException("Error: Username already exists!");
+            throw new DuplicateModelException("Error: Username already exists!");
         } catch (SQLException e) {
             throw new DataAccessException("Database error occurred");
         }

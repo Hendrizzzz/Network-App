@@ -1,5 +1,6 @@
 package hendrizzzz.network_app.service;
 
+import exception.DuplicateModelException;
 import exception.InvalidPasswordException;
 import exception.UserNotFoundException;
 import hendrizzzz.network_app.dao.UserDao;
@@ -20,7 +21,16 @@ public class UserService {
     public void addUser(String username, String firstName, String lastName, String password) {
         validateUserDetails(username, firstName, lastName, password);
         User newUser = new User(firstName, lastName, username, hashPassword(password));
-        userDao.addUser(newUser);
+        addUser(newUser);
+    }
+
+    private void addUser(User newUser) {
+        try {
+            userDao.addUser(newUser);
+        } catch (DuplicateModelException e) {
+            // TODO : log it
+            throw e;
+        }
     }
 
     public void addUser(String username, String firstName, String lastName, String password, LocalDate birthDate) {
@@ -29,13 +39,13 @@ public class UserService {
 
         int age = Period.between(birthDate, LocalDate.now()).getYears();
         User newUser = new User(firstName, lastName, username, hashPassword(password), (byte) age, birthDate);
-        userDao.addUser(newUser);
+        addUser(newUser);
     }
 
     public void addUser(String username, String firstName, String lastName, String password, char gender) {
         validateUserDetails(username, firstName, lastName, password);
         User newUser = new User(firstName, lastName, username, hashPassword(password), gender);
-        userDao.addUser(newUser);
+        addUser(newUser);
     }
 
     public void addUser(String username, String firstName, String lastName, String password, char gender, LocalDate birthDate) {
@@ -44,7 +54,7 @@ public class UserService {
 
         int age = Period.between(birthDate, LocalDate.now()).getYears();
         User newUser = new User(firstName, lastName, username, hashPassword(password), gender, (byte) age, birthDate);
-        userDao.addUser(newUser);
+        addUser(newUser);
     }
 
     private void validateUserDetails(String username, String firstName, String lastName, String password) {
