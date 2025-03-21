@@ -1,5 +1,7 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DataAccessException;
+import exception.DuplicateUserException;
 import exception.NoChangeException;
 import hendrizzzz.network_app.model.User;
 
@@ -17,23 +19,34 @@ public class UserDao {
             statement.setString(3, user.getUsername());
             statement.setString(4, user.getHashedPassword());
 
+            if (user.getGender() != null)
+                statement.setString(5, String.valueOf(user.getGender())); // Assuming gender is stored as CHAR
+            else
+                statement.setNull(5, Types.CHAR);
+
+            if (user.getBirthDate() != null) {
+                statement.setInt(6, user.getAge());
+                statement.setDate(7, Date.valueOf(user.getBirthDate()));
+            } else {
+                statement.setNull(6, Types.TINYINT);
+                statement.setNull(7, Types.DATE);
+            }
+
             statement.executeUpdate();
-        }
-//        catch (SQLIntegrityConstraintViolationException e) {
-//            throw new DuplicateUserException("Error: Username already exists! ");
-//        }
-        catch (SQLException e) {
-            throw new RuntimeException(e); // TODO : to be improved
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new DuplicateUserException("Error: Username already exists!");
+        } catch (SQLException e) {
+            throw new DataAccessException("Database error occurred");
         }
     }
 
 
-    public void deleteUser(String username) {
+    public int deleteUser(String username) {
         try (Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(Sql.deleteUser)) {
 
             statement.setString(1, username);
-            statement.executeUpdate();
+            return statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -48,8 +61,6 @@ public class UserDao {
             statement.setString(2, username);
 
             return statement.executeUpdate();
-//            if (affectedRows == 0)
-//                throw new NoChangeException("Your username is already " + newUsername);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -64,8 +75,6 @@ public class UserDao {
             statement.setString(2, username);
 
             return statement.executeUpdate();
-//            if (affectedRows == 0)
-//                throw new NoChangeException("Your first name is already " + newFirstName);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -80,8 +89,6 @@ public class UserDao {
             statement.setString(2, username);
 
             return statement.executeUpdate();
-//            if (affectedRows == 0)
-//                throw new NoChangeException("Your last name is already " + newLastName);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -95,8 +102,6 @@ public class UserDao {
             statement.setString(2, username);
 
             return statement.executeUpdate();
-//            if (affectedRows == 0)
-//                throw new NoChangeException("Your password is the same. ");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -104,7 +109,6 @@ public class UserDao {
 
 
     public String getHashedPassword(String username) {
-        String hashedPassword;
         try (Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(Sql.getHashedPassword)) {
 
@@ -120,11 +124,11 @@ public class UserDao {
     }
 
 
-    public int changeBirthDate(String username, LocalDate birthdate) {
+    public int changeBirthDate(String username, Date birthdate) {
         try (Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(Sql.changeBirthDate)) {
 
-            statement.setDate(1, Date.valueOf(birthdate));
+            statement.setDate(1, birthdate);
             statement.setString(2, username);
             return statement.executeUpdate();
         } catch (SQLException e) {
