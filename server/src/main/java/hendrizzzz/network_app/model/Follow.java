@@ -2,25 +2,30 @@ package hendrizzzz.network_app.model;
 
 import java.time.LocalDateTime;
 
-public class Followers {
-    private int userId;
+public class Follow {
+    private int followeeId;
     private int followerId;
     private LocalDateTime timeStamp;
 
 
-    public Followers(int userId, int followerId, LocalDateTime timeStamp) {
-        this.userId = userId;
+    public Follow(int followeeId, int followerId, LocalDateTime timeStamp) {
+        this.followeeId = followeeId;
         this.followerId = followerId;
         this.timeStamp = timeStamp;
     }
 
-
-    public int getUserId() {
-        return userId;
+    public Follow(int followeeId, int followerId) {
+        this.followeeId = followeeId;
+        this.followerId = followerId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+
+    public int getFolloweeId() {
+        return followeeId;
+    }
+
+    public void setFolloweeId(int followeeId) {
+        this.followeeId = followeeId;
     }
 
     public int getFollowerId() {

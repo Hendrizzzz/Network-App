@@ -1,10 +1,12 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DuplicateModelException;
 import hendrizzzz.network_app.model.Friendship;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class FriendshipDao {
 
@@ -16,20 +18,22 @@ public class FriendshipDao {
             statement.setInt(2, friendship.getOther_userId());
             statement.setString(3, friendship.getStatus());
             statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new DuplicateModelException("Error: Friendship already exists!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
 
-    public void updateFriendship(Friendship friendship, String newStatus) {
+    public int updateFriendship(Friendship updatedFriendship) {
         try (Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(Sql.updateFriendship)) {
 
-            statement.setString(1, newStatus);
-            statement.setInt(2, friendship.getUserId());
-            statement.setInt(3, friendship.getOther_userId());
-            statement.executeUpdate();
+            statement.setString(1, updatedFriendship.getStatus());
+            statement.setInt(2, updatedFriendship.getUserId());
+            statement.setInt(3, updatedFriendship.getOther_userId());
+            return statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
