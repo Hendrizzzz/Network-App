@@ -35,7 +35,7 @@ public class Sql {
 
     // NotificationDAO
     static String markRead = "UPDATE notifications SET is_read = true WHERE id = ?";
-    static String addNotification(String type) {return String.format("INSERT INTO notifications (user_id, notification_type, content, %s) VALUES (?, ?, ?, ?)", type);}
+    static String addNotification(String column){ return String.format("INSERT INTO notifications (user_id, notification_type, content, %s) VALUES (?, ?, ?, ?)", column); }
     static String deleteNotification = "DELETE FROM notifications WHERE id = ?";
 
 
@@ -46,7 +46,7 @@ public class Sql {
 
 
     // LikeDAO
-    static String addLike(String type) { return "INSERT INTO like (is_a_post, user_who_liked, %s) VALUES (?, ?, ?)";}
+    static String addLike = "INSERT INTO like (is_a_post, user_who_liked, comment_id, post_id) VALUES (?, ?, ?, ?)";
     static String removeLike = "DELETE FROM like WHERE id = ?";
 
 
