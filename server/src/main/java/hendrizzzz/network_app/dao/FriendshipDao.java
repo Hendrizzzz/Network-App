@@ -2,7 +2,6 @@ package hendrizzzz.network_app.dao;
 
 import exception.DuplicateModelException;
 import hendrizzzz.network_app.model.Friendship;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

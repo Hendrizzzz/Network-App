@@ -2,15 +2,14 @@ package hendrizzzz.network_app.service;
 
 import exception.DuplicateModelException;
 import exception.FriendshipNotFoundException;
-import exception.NoChangeException;
 import hendrizzzz.network_app.dao.FollowersDao;
 import hendrizzzz.network_app.dao.FriendshipDao;
 import hendrizzzz.network_app.model.Follow;
 import hendrizzzz.network_app.model.Friendship;
 
 public class RelationshipService {
-    private FollowersDao followDao;
-    private FriendshipDao friendshipDao;
+    private final FollowersDao followDao;
+    private final FriendshipDao friendshipDao;
 
 
     public RelationshipService(FollowersDao followDao, FriendshipDao friendshipDao) {
