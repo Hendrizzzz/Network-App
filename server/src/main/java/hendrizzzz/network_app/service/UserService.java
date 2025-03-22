@@ -42,15 +42,17 @@ public class UserService {
         addUser(newUser);
     }
 
-    public void addUser(String username, String firstName, String lastName, String password, char gender) {
+    public void addUser(String username, String firstName, String lastName, String password, Character gender) {
         validateUserDetails(username, firstName, lastName, password);
+        validateGender(gender);
         User newUser = new User(firstName, lastName, username, hashPassword(password), gender);
         addUser(newUser);
     }
 
-    public void addUser(String username, String firstName, String lastName, String password, char gender, LocalDate birthDate) {
+    public void addUser(String username, String firstName, String lastName, String password, Character gender, LocalDate birthDate) {
         validateUserDetails(username, firstName, lastName, password);
         validateBirthDate(birthDate);
+        validateGender(gender);
 
         int age = Period.between(birthDate, LocalDate.now()).getYears();
         User newUser = new User(firstName, lastName, username, hashPassword(password), gender, (byte) age, birthDate);
@@ -67,6 +69,13 @@ public class UserService {
     private void validateBirthDate(LocalDate birthDate) {
         if (birthDate == null || birthDate.isAfter(LocalDate.now())) throw new IllegalArgumentException("Invalid birthdate.");
     }
+
+
+    private void validateGender(Character gender) {
+        if (gender == null || (gender != 'M' && gender != 'F' && gender != 'O'))
+            throw new IllegalArgumentException("Invalid gender. Must be 'M', 'F' or 'O.");
+    }
+
 
 
 
