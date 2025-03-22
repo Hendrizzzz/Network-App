@@ -24,6 +24,12 @@ public class Message {
         this.timeStamp = timeStamp;
     }
 
+    public Message(int senderId, int receiverId, String contents) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.contents = contents;
+    }
+
     public int getId() {
         return id;
     }
