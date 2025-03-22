@@ -34,6 +34,18 @@ public class Notification {
         this.isRead = isRead;
     }
 
+    public Notification(int userId, String notificationType, String contents, int id) {
+        this.userId = userId;
+        this.notificationType = notificationType;
+        this.contents = contents;
+        switch (notificationType) {
+            case "like" -> this.likeId = id;
+            case "comment" -> this.commentId = id;
+            case "friend_request" -> this.friendRequestSenderId = id;
+            case "message" -> this.message_id = id;
+        }
+    }
+
     public int getId() {
         return id;
     }
