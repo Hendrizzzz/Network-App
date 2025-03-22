@@ -7,10 +7,10 @@ public class Post {
     private int authorId;
     private String contents;
     private LocalDateTime datePosted;
-    private char privacy;
+    private Character privacy;
     private int commentCount;
 
-    public Post(int id, int authorId, String contents, LocalDateTime datePosted, char privacy, int commentCount) {
+    public Post(int id, int authorId, String contents, LocalDateTime datePosted, Character privacy, int commentCount) {
         this.id = id;
         this.authorId = authorId;
         this.contents = contents;
@@ -19,10 +19,16 @@ public class Post {
         this.commentCount = commentCount;
     }
 
-    public Post(int authorId, String contents, LocalDateTime datePosted, char privacy) {
+    public Post(int authorId, String contents, LocalDateTime datePosted, Character privacy) {
         this.authorId = authorId;
         this.contents = contents;
         this.datePosted = datePosted;
+        this.privacy = privacy;
+    }
+
+    public Post(int authorId, String contents, Character privacy) {
+        this.authorId = authorId;
+        this.contents = contents;
         this.privacy = privacy;
     }
 
@@ -58,11 +64,11 @@ public class Post {
         this.datePosted = datePosted;
     }
 
-    public char getPrivacy() {
+    public Character getPrivacy() {
         return privacy;
     }
 
-    public void setPrivacy(char privacy) {
+    public void setPrivacy(Character privacy) {
         this.privacy = privacy;
     }
 

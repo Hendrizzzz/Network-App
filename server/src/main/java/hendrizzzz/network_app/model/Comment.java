@@ -24,6 +24,12 @@ public class Comment {
         this.timeStamp = timeStamp;
     }
 
+    public Comment(int postId, int authorId, String contents) {
+        this.postId = postId;
+        this.authorId = authorId;
+        this.content = contents;
+    }
+
     public int getId() {
         return id;
     }

@@ -29,6 +29,15 @@ public class Like {
         this.postId = postId;
     }
 
+    public Like(boolean isAPost, int userIdWhoLiked, int commentOrPostId) {
+        this.isAPost = isAPost;
+        this.user_id_who_liked = userIdWhoLiked;
+        if (isAPost)
+            this.postId = commentOrPostId;
+        else
+            this.commentId = commentOrPostId;
+    }
+
 
     public int getId() {
         return id;
