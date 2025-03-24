@@ -2,12 +2,15 @@ package hendrizzzz.network_app.dao;
 
 import exception.DataAccessException;
 import hendrizzzz.network_app.model.Notification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class NotificationDao {
+    private static final Logger logger = LogManager.getLogger(NotificationDao.class);
 
     public void markRead(int id) {
         try (Connection connection = DatabaseConnection.getConnection();
@@ -16,6 +19,8 @@ public class NotificationDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while marking notification read: notificationId={}, error={}",
+                    id, e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }
@@ -38,6 +43,8 @@ public class NotificationDao {
 
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while adding notification: userId={}, notificationType={}, content={}, error={}",
+                    notification.getUserId(), notification.getNotificationType(), notification.getContents(), e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }
@@ -77,6 +84,8 @@ public class NotificationDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while deleting notification: notificationId={}, error={}",
+                    id, e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }

@@ -2,12 +2,15 @@ package hendrizzzz.network_app.dao;
 
 import exception.DataAccessException;
 import hendrizzzz.network_app.model.Comment;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CommentDao {
+    private static final Logger logger = LogManager.getLogger(CommentDao.class);
 
     public void addComment(Comment comment) {
         try (Connection connection = DatabaseConnection.getConnection();
@@ -18,6 +21,8 @@ public class CommentDao {
             statement.setString(3, comment.getContent());
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while adding comment: postId={}, authorId={}, comment={}, error={}",
+                    comment.getPostId(), comment.getAuthorId(), comment.getContent(), e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }
@@ -30,6 +35,8 @@ public class CommentDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while deleting comment: commentId={}, error={}",
+                    id, e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }
@@ -43,6 +50,8 @@ public class CommentDao {
             statement.setInt(2, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while updating comment: commentId={}, newComment={}, error={}",
+                    id, newContents, e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }

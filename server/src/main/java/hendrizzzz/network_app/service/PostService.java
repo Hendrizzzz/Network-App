@@ -7,8 +7,11 @@ import hendrizzzz.network_app.dao.PostDao;
 import hendrizzzz.network_app.model.Comment;
 import hendrizzzz.network_app.model.Like;
 import hendrizzzz.network_app.model.Post;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PostService {
+    private final static Logger logger = LogManager.getLogger(PostService.class);
     private final PostDao postDao;
     private final CommentDao commentDao;
     private final LikeDao likeDao;
@@ -28,12 +31,14 @@ public class PostService {
 
         Post post = new Post(authorId, contents, privacy);
         postDao.addPost(post);
+        logger.info("Post added successfully: authorId={}, contents={}, privacy={}",authorId, contents, privacy);
     }
 
 
     public void deletePost(int postId) {
         if (postId < 1) throw new IllegalArgumentException("postId cannot be less than 1. ");
         postDao.deletePost(postId);
+        logger.info("Post deleted successfully: postId={}",postId);
     }
 
 
@@ -43,24 +48,29 @@ public class PostService {
         if (privacy == null || (privacy != 'A' && privacy != 'F' && privacy != 'N')) throw new IllegalArgumentException("Invalid privacy. Must be 'A', 'F', or 'N'. ");
 
         postDao.updatePost(postId, newContents, privacy);
+        logger.info("Post updated successfully: postId={}, newContents={}, privacy={}", postId, newContents, privacy);
     }
 
 
     public void incrementCommentCount(int postId) {
         if (postId < 1) throw new IllegalArgumentException("postId cannot be less than 1. ");
         postDao.incrementCommentCount(postId);
+        logger.info("Post comment count is successfully incremented: postId={}", postId);
     }
 
 
     public void decrementCommentCount(int postId) {
         if (postId < 1) throw new IllegalArgumentException("postId cannot be less than 1. ");
         postDao.decrementCommentCount(postId);
+        logger.info("Post comment count is successfully decremented: postId={}", postId);
     }
 
 
     public int getCommentCount(int postId) {
         if (postId < 1) throw new IllegalArgumentException("postId cannot be less than 1. ");
-        return postDao.getCommentCount(postId);
+        int commentCount =  postDao.getCommentCount(postId);
+        logger.info("Post comment count is successfully retrieved: postId={}", postId);
+        return commentCount;
     }
 
 
@@ -72,6 +82,7 @@ public class PostService {
 
         try {
             likeDao.addLike(like);
+
         } catch (DuplicateModelException e) {
             // TODO : log
             throw e;

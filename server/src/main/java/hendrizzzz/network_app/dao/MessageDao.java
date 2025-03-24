@@ -2,13 +2,15 @@ package hendrizzzz.network_app.dao;
 
 import exception.DataAccessException;
 import hendrizzzz.network_app.model.Message;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MessageDao {
-
+    private static final Logger logger = LogManager.getLogger(MessageDao.class);
 
     public void addMessage(Message message) {
         try (Connection connection = DatabaseConnection.getConnection();
@@ -19,6 +21,8 @@ public class MessageDao {
             statement.setString(3, message.getContents());
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while adding message: senderId={}, receiverId={}, error={}",
+                    message.getSenderId(), message.getReceiverId(), e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }
@@ -31,6 +35,8 @@ public class MessageDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while deleting message: messageId={}, error={}",
+                    id, e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
     }
@@ -44,8 +50,9 @@ public class MessageDao {
             statement.setInt(2, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.warn("Database error occurred while updating message: messageId={}, newMessage={}, error={}",
+                    id, newMessage, e.getMessage());
             throw new DataAccessException("Database error occurred");
         }
-
     }
 }
