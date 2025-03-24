@@ -1,5 +1,6 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DataAccessException;
 import exception.DuplicateModelException;
 import hendrizzzz.network_app.model.Friendship;
 import java.sql.Connection;
@@ -20,7 +21,7 @@ public class FriendshipDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new DuplicateModelException("Error: Friendship already exists!");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -34,7 +35,7 @@ public class FriendshipDao {
             statement.setInt(3, updatedFriendship.getOther_userId());
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -47,7 +48,7 @@ public class FriendshipDao {
             statement.setInt(2, otherUserId);
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 }

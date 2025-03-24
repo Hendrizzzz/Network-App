@@ -1,5 +1,6 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DataAccessException;
 import exception.DuplicateModelException;
 import hendrizzzz.network_app.model.Like;
 import java.sql.Connection;
@@ -28,7 +29,7 @@ public class LikeDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new DuplicateModelException("Error: Like already exists!");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -41,7 +42,7 @@ public class LikeDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 

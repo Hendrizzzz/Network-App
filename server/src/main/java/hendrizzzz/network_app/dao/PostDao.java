@@ -1,5 +1,6 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DataAccessException;
 import hendrizzzz.network_app.model.Post;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ public class PostDao {
             statement.executeUpdate();
         }
         catch (SQLException e) {
-            throw new RuntimeException(e); // TODO : to be improved
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -31,7 +32,7 @@ public class PostDao {
             statement.setInt(1, postId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -46,7 +47,7 @@ public class PostDao {
 
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -57,7 +58,7 @@ public class PostDao {
             statement.setInt(1, postId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -69,7 +70,7 @@ public class PostDao {
             statement.setInt(1, postId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -84,7 +85,7 @@ public class PostDao {
             if (resultSet.next())
                 resultSet.getInt("comment_count");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return -1; // invalid
     }

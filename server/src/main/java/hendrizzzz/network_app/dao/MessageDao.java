@@ -1,5 +1,6 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DataAccessException;
 import hendrizzzz.network_app.model.Message;
 
 import java.sql.Connection;
@@ -18,7 +19,7 @@ public class MessageDao {
             statement.setString(3, message.getContents());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -30,7 +31,7 @@ public class MessageDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -43,7 +44,7 @@ public class MessageDao {
             statement.setInt(2, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
 
     }

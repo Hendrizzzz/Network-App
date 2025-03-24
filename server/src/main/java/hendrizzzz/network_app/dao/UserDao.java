@@ -48,7 +48,7 @@ public class UserDao {
             statement.setString(1, username);
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -62,7 +62,7 @@ public class UserDao {
 
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -76,7 +76,7 @@ public class UserDao {
 
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -90,7 +90,7 @@ public class UserDao {
 
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -103,7 +103,7 @@ public class UserDao {
 
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -118,7 +118,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getString("hashed_password");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return null;
     }
@@ -132,7 +132,7 @@ public class UserDao {
             statement.setString(2, username);
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -147,7 +147,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getString("first_name");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return null;
     }
@@ -163,7 +163,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getString("last_name");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return null;
     }
@@ -179,7 +179,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getDate("birthday").toLocalDate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return null;
     }
@@ -196,7 +196,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getInt("friends_count");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return -1;
     }
@@ -217,7 +217,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getString("who_can_comment").charAt(0);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return '0'; // invalid
     }
@@ -233,7 +233,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getString("who_can_send_friend_requests").charAt(0);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return '0'; // invalid
     }
@@ -247,7 +247,7 @@ public class UserDao {
             statement.setString(2, username);
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -260,7 +260,7 @@ public class UserDao {
             statement.setString(2, username);
             return statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -275,7 +275,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getDate("join_date").toLocalDate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return null;
     }
@@ -291,7 +291,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getInt("age");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return -1;
     }
@@ -307,7 +307,7 @@ public class UserDao {
             if (resultSet.next())
                 return resultSet.getString("gender").charAt(0);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
         return '0'; // invalid
     }

@@ -1,5 +1,6 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DataAccessException;
 import exception.DuplicateModelException;
 import hendrizzzz.network_app.model.Follow;
 
@@ -21,7 +22,7 @@ public class FollowersDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new DuplicateModelException("Error: Follow already exists!");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 
@@ -34,7 +35,7 @@ public class FollowersDao {
             statement.setInt(2, follow.getFollowerId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Database error occurred");
         }
     }
 }
