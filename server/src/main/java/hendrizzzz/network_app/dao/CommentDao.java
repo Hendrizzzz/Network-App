@@ -1,5 +1,6 @@
 package hendrizzzz.network_app.dao;
 
+import exception.DataAccessException;
 import hendrizzzz.network_app.model.Comment;
 
 import java.sql.Connection;
